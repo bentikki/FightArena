@@ -60,7 +60,7 @@ namespace FightArena
 
                 FightController battle = new FightController();
 
-                battle.Fight(ContestantsList[firstFighter], ContestantsList[secondFighter]);
+                battle.Fight(SemiFinalsList[firstFighter], SemiFinalsList[secondFighter]);
 
                 FinalsList.Add(battle.Winner);
 
@@ -76,7 +76,7 @@ namespace FightArena
 
             FightController battle = new FightController();
 
-            battle.Fight(ContestantsList[firstFighter], ContestantsList[secondFighter]);
+            battle.Fight(FinalsList[firstFighter], FinalsList[secondFighter]);
 
             winner = battle.Winner;
 
