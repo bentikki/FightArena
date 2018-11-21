@@ -43,6 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArenaController.cs" />
+    <Compile Include="FightController.cs" />
+    <Compile Include="Character.cs" />
+    <Compile Include="DAL.cs" />
+    <Compile Include="GUI.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
