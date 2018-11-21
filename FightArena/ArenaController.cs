@@ -6,28 +6,39 @@ using System.Threading.Tasks;
 
 namespace FightArena
 {
-    class ArenaController
+    class ArenaController : DAL
     {
-        public List<Character> ContestantsList = new List<Character>();
-        public List<Character> SemiFinalsList = new List<Character>();
-        public List<Character> FinalsList = new List<Character>();
-
+        private List<Character> contestantsList = new List<Character>();
+        private List<Character> semiFinalsList = new List<Character>();
+        private List<Character> finalsList = new List<Character>();
         private Character winner;
 
+        //Properties to encapsulate
+        public List<Character> ContestantsList
+        {
+            get { return this.contestantsList; }
+        }
+        public List<Character> SemiFinalsList
+        {
+            get { return this.semiFinalsList; }
+        }
+        public List<Character> FinalsList
+        {
+            get { return this.finalsList; }
+        }
+        public Character Winner
+        {
+            get { return this.winner; }
+        }
 
-        public ArenaController(List<Character> contestants)
+        public ArenaController()
         {
 
-            this.ContestantsList = contestants;
+            this.contestantsList = new DAL().GetContestants();
 
             FightOne();
             SemiFinalsBattle();
             Finals();
-        }
-
-        public Character GetWinner()
-        {
-            return this.winner;
         }
 
         public void FightOne()
@@ -35,14 +46,14 @@ namespace FightArena
             int firstFighter = 0;
             int secondFighter = 0;
 
-            for (int i = 1; i <= ContestantsList.Count() / 2; i++)
+            for (int i = 1; i <= contestantsList.Count() / 2; i++)
             {
                 secondFighter = firstFighter + 1;
 
                 FightController battle = new FightController();
 
-                battle.Fight(ContestantsList[firstFighter], ContestantsList[secondFighter]);
-                SemiFinalsList.Add(battle.Winner);
+                battle.Fight(contestantsList[firstFighter], contestantsList[secondFighter]);
+                semiFinalsList.Add(battle.Winner);
 
                 firstFighter = firstFighter + 2;
             }
@@ -54,15 +65,15 @@ namespace FightArena
             int firstFighter = 0;
             int secondFighter = 0;
 
-            for (int i = 1; i <= SemiFinalsList.Count() / 2; i++)
+            for (int i = 1; i <= semiFinalsList.Count() / 2; i++)
             {
                 secondFighter = firstFighter + 1;
 
                 FightController battle = new FightController();
 
-                battle.Fight(SemiFinalsList[firstFighter], SemiFinalsList[secondFighter]);
+                battle.Fight(semiFinalsList[firstFighter], semiFinalsList[secondFighter]);
 
-                FinalsList.Add(battle.Winner);
+                finalsList.Add(battle.Winner);
 
                 firstFighter = firstFighter + 2;
             }
@@ -76,7 +87,7 @@ namespace FightArena
 
             FightController battle = new FightController();
 
-            battle.Fight(FinalsList[firstFighter], FinalsList[secondFighter]);
+            battle.Fight(finalsList[firstFighter], finalsList[secondFighter]);
 
             winner = battle.Winner;
 

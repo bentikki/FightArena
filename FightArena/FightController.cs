@@ -10,7 +10,6 @@ namespace FightArena
     class FightController
     {
         private Character winner;
-
         private Character loser;
 
         public Character Winner
